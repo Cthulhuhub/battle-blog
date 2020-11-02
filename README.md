@@ -17,3 +17,6 @@ A microblogging site, except its all fantasy characters
 - Character generator
 - Character stats
 - Image uploads/profile pictures
+
+### DB schema
+https://dbdiagram.io/d/5fa06b563a78976d7b7a32cb
