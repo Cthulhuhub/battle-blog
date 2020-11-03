@@ -9,6 +9,17 @@ from collections import Counter
 db = SQLAlchemy()
 
 
+
+
+
+
+
+
+# follows = db.Table('follows',
+#     db.Column('leader_id', db.Integer, db.ForeignKey('characters.id'), primary_key=True),
+#     db.Column('follower_id', db.Integer, db.ForeignKey('characters.id'), primary_key=True)
+# )
+
 class User(db.Model):
     __tablename__ = 'users'
 
@@ -49,11 +60,18 @@ class Character(db.Model):
     name = db.Column(db.String(50), nullable=False)
     bio = db.Column(db.String(500), nullable=False)
     class_name = db.Column(db.String(50), nullable=False)
+    follower_count = db.Column(db.Integer)
+
 
     creator = db.relationship('User')
     posts = db.relationship('Post')
-    # follows = db.relationship('Follow')
-    likes = db.relationship('Like', secondary='likes')
+
+    follows = db.relationship('Follow',
+        back_populates='characters',
+        secondary='follows',
+        primaryjoin=id==('follows.leader_id'),
+        secondaryjoin=id==('follows.follower_id'),
+    )
 
     def to_dict(self):
         return {
@@ -62,6 +80,7 @@ class Character(db.Model):
             'name': self.name,
             'bio': self.bio,
             'class_name': self.class_name,
+            'like_count': self.like_count,
             'creator': self.creator.to_dict()
         }
 
@@ -80,13 +99,6 @@ class Post(db.Model):
     def like_count(self):
         return self.like_count
 
-    @like_count.setter
-    def like_count(self, up_or_down):
-        if up_or_down is 'up':
-            self.like_count += 1
-        elif up_or_down is 'down':
-            self.like_count -= 1
-
     @property
     def most_used_words(self):
         return self.most_used_words
@@ -100,7 +112,7 @@ class Post(db.Model):
 
 
     author = db.relationship('Character')
-    likes = db.relationship('Character', secondary="likes")
+    likes = db.relationship('Like', back_populates='posts', secondary='likes')
 
     def to_dict(self):
         return {
@@ -120,15 +132,15 @@ class Like(db.Model):
     character_id = db.Column(db.Integer, db.ForeignKey('characters.id'), primary_key=True, nullable=False)
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), primary_key=True, nullable=False)
 
-    character = db.relationship('Character', backref=backref('likes', cascade='all, delete-orphan'))
-    post = db.relationship('Post', backref=backref('likes', cascade='all, delete-orphan'))
+    character = db.relationship('Character', backref=db.backref('likes'))
+    post = db.relationship('Post', backref=db.backref('likes'))
 
 
 class Follow(db.Model):
     __tablename__ = 'follows'
 
-    follower_id = db.Column(db.Ineger, db.ForeignKey('characters.id'), primary_key=True, nullable=False)
-    leader_id = db.Column(db.Integer, db.ForeignKey('characters.id'), primary_key=True, nullable=False)
+    leader_id = db.Column(db.Integer, db.ForeignKey('characters.id'), primary_key=True)
+    follower_id = db.Column(db.Integer, db.ForeignKey('characters.id'), primary_key=True)
 
-    follower = db.relationship('Character', backref=backref('likes', cascade='all, delete-orphan'))
-    leader = db.relationship('Character', backref=backref('likes', cascade='all, delete-orphan'))
+    leader = db.relationship('Character', backref=db.backref('follows'))
+    follower = db.relationship('Character', backref=db.backref('follows'))
