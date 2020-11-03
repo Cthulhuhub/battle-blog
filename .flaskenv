@@ -1,0 +1,1 @@
+FLASK_APP=battle_blog.py
