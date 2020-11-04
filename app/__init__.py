@@ -8,13 +8,17 @@ from flask_jwt_extended import JWTManager, jwt_required, get_raw_jwt
 
 from .config import Config
 from .models import db, User
-
+from .routes import auth
+from .api import char_routes
 
 app = Flask(__name__)
 
 app.config.from_object(Config)
 
 db.init_app(app)
+
+app.register_blueprint(auth.bp)
+app.register_blueprint(char_routes.chars)
 
 migrate = Migrate(app, db)
 
@@ -35,13 +39,6 @@ def logout():
     jti = get_raw_jwt()['jti']
     blacklist.add(jti)
     return {'msg': 'Logged out'}, 200
-
-
-@app.route('/verify_token', methods=['GET'])
-@jwt_required
-def verify_token():
-    return {'msg': 'OK'}, 200
-
 
 CORS(app)
 
@@ -64,3 +61,9 @@ def react_root(path):
     if path == 'favicon.ico':
         return app.send_static_file('favicon.ico')
     return app.send_static_file('index.html')
+
+
+@app.route('/verify_token', methods=['GET'])
+@jwt_required
+def verify_token():
+    return {'msg': 'OK'}, 200

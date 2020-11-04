@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from app import app, db
-from app.models import User, Character, Post, Like, Follow
+from app.models import User, Character, Post, Like, follows
 from gensim.parsing.preprocessing import remove_stopwords
 from collections import Counter
 
@@ -42,7 +42,7 @@ with app.app_context():
         user_id=1,
         name='fakechar1',
         bio='The first seeded character',
-        class_name='Mage'
+        class_name='Mage',
     )
 
     character2 = Character(
@@ -56,7 +56,8 @@ with app.app_context():
         user_id=3,
         name='fakechar3',
         bio='The third seeded character',
-        class_name='Warlock'
+        class_name='Warlock',
+        followers=[character1, character2]
     )
 
     character4 = Character(
@@ -98,10 +99,10 @@ with app.app_context():
         like_count=0
     )
 
-    follow1 = Follow(
-        leader_id=1,
-        follower_id=2
-    )
+    # follow1 = follows(
+    #     leader_id=1,
+    #     follower_id=2
+    # )
 
     db.session.add(user1)
     db.session.add(user2)
@@ -117,6 +118,6 @@ with app.app_context():
     db.session.add(post3)
     db.session.add(post4)
 
-    db.session.add(follow1)
+    # db.session.add(follow1)
 
     db.session.commit()

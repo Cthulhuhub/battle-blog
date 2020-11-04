@@ -1,5 +1,6 @@
 #pylint: skip-file
 
+import json
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from gensim.parsing.preprocessing import remove_stopwords
@@ -15,10 +16,10 @@ db = SQLAlchemy()
 
 
 
-# follows = db.Table('follows',
-#     db.Column('leader_id', db.Integer, db.ForeignKey('characters.id'), primary_key=True),
-#     db.Column('follower_id', db.Integer, db.ForeignKey('characters.id'), primary_key=True)
-# )
+follows = db.Table('follows',
+    db.Column('leader_id', db.Integer, db.ForeignKey('characters.id'), primary_key=True),
+    db.Column('follower_id', db.Integer, db.ForeignKey('characters.id'), primary_key=True)
+)
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -66,12 +67,14 @@ class Character(db.Model):
     creator = db.relationship('User')
     posts = db.relationship('Post')
 
-    follows = db.relationship('Follow',
-        back_populates='characters',
-        secondary='follows',
-        primaryjoin=id==('follows.leader_id'),
-        secondaryjoin=id==('follows.follower_id'),
+    followers = db.relationship('Character',
+        secondary=follows,
+        backref=db.backref('leaders'),
+        primaryjoin=id==follows.c.leader_id,
+        secondaryjoin=id==follows.c.follower_id
     )
+
+    likes = db.relationship('Like', back_populates='character')
 
     def to_dict(self):
         return {
@@ -80,7 +83,7 @@ class Character(db.Model):
             'name': self.name,
             'bio': self.bio,
             'class_name': self.class_name,
-            'like_count': self.like_count,
+            'like_count': self.follower_count,
             'creator': self.creator.to_dict()
         }
 
@@ -92,27 +95,33 @@ class Post(db.Model):
     character_id = db.Column(db.Integer, db.ForeignKey('characters.id'), nullable=False)
     title = db.Column(db.String(30), nullable=False)
     content = db.Column(db.String(2000), nullable=False)
-    most_used_words = db.Column(db.String(), nullable=False)
-    like_count = db.Column(db.Integer, nullable=False)
+    _most_used_words = db.Column(db.String(), nullable=False)
+    _like_count = db.Column(db.Integer, nullable=False)
 
     @property
     def like_count(self):
-        return self.like_count
+        return self._like_count
 
     @property
     def most_used_words(self):
-        return self.most_used_words
+        return self._most_used_words
+
+
+    @like_count.setter
+    def like_count(self, num):
+        self._like_count = num
+
 
     @most_used_words.setter
-    def most_used_words(self):
-        filtered_words = remove_stopwords(self.content)
+    def most_used_words(self, content):
+        filtered_words = remove_stopwords(content)
         words = filtered_words.split()
         counter = Counter(words)
-        return dict(counter.most_common(5))
+        self._most_used_words = json.dumps(dict(counter.most_common(5)))
 
 
     author = db.relationship('Character')
-    likes = db.relationship('Like', back_populates='posts', secondary='likes')
+    likes = db.relationship('Like', back_populates='post')
 
     def to_dict(self):
         return {
@@ -132,15 +141,14 @@ class Like(db.Model):
     character_id = db.Column(db.Integer, db.ForeignKey('characters.id'), primary_key=True, nullable=False)
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), primary_key=True, nullable=False)
 
-    character = db.relationship('Character', backref=db.backref('likes'))
-    post = db.relationship('Post', backref=db.backref('likes'))
+    character = db.relationship('Character', back_populates='likes')
+    post = db.relationship('Post', back_populates='likes')
 
 
-class Follow(db.Model):
-    __tablename__ = 'follows'
+# class Follow(db.Model):
+#     __tablename__ = 'follows'
 
-    leader_id = db.Column(db.Integer, db.ForeignKey('characters.id'), primary_key=True)
-    follower_id = db.Column(db.Integer, db.ForeignKey('characters.id'), primary_key=True)
+#     leader_id = db.Column(db.Integer, db.ForeignKey('characters.id'), primary_key=True)
+#     follower_id = db.Column(db.Integer, primary_key=True)
 
-    leader = db.relationship('Character', backref=db.backref('follows'))
-    follower = db.relationship('Character', backref=db.backref('follows'))
+#     leader = db.relationship('Character', backref=db.backref('follows'))
