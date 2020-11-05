@@ -13,7 +13,7 @@ function UserHomeContainer() {
 
     useEffect(() => {
         dispatch(loadChars(user.id))
-    }, [])
+    }, [dispatch, user.id])
 
     if (!user) {
         user = JSON.parse(window.localStorage.getItem('USER'))

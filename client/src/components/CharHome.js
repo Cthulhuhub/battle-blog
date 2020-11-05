@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-
+import Post from './Post'
 
 function CharacterFeed() {
     const { user, token } = useSelector(state => state.auth)
@@ -40,21 +40,18 @@ function CharacterFeed() {
         return <></>
     }
 
-    let postsCount
+    // let postCount;
 
     if (posts[posts.length - 1].count) {
-        postsCount = posts.pop().count
+        posts.pop()
     }
-    console.log(typeof postsCount)
+    // postCount = ''
+
     return (
         <>
             <div className='posts-container'>
                 {posts.map(post => (
-                    <div className='post-box' key={post.id}>
-                        <h2>{post.title}</h2>
-                        <p>{post.content}</p>
-                    <p><small>{post.author.name} - {post.created_at.substring(0, 12)}</small></p>
-                    </div>
+                    <Post post={post} key={post.id} />
                 ))}
             </div>
             <div className='page-controls'>
@@ -62,7 +59,7 @@ function CharacterFeed() {
                 <button value={page} onClick={changePage}>{'<'}</button>
                 <button value='page-count' onClick={changePage}>{page + 1}</button>
                 <button value={page + 1} onClick={changePage}>{'>'}</button>
-                <button value={Math.ceil(postsCount / 10)} onClick={changePage}>{'>>'}</button>
+                {/* <button value={postCount} onClick={changePage}>{'>>'}</button> */}
             </div>
         </>
     )

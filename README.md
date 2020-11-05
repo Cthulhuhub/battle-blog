@@ -4,8 +4,6 @@ A microblogging site, except its all fantasy characters
 ## Features
 - Character profile creator
 - Users can have, and manage, multiple characters
-- Characters can follow other characters for a personalized home page
-  - Different characters can have different home page content
 - Characters can create text posts about adventures
 - Posts will automatically generate links to other relevant posts based on word matching
 - Characters will have class selection
@@ -14,6 +12,8 @@ A microblogging site, except its all fantasy characters
 - Comments
 
 ## Additional features
+- Characters can follow other characters for a personalized home page
+  - Different characters can have different home page content
 - Character generator
 - Character stats
 - Image uploads/profile pictures

@@ -7,6 +7,8 @@ import { logout } from '../store/auth'
 import { useDispatch } from 'react-redux'
 import { unsetAllChars } from '../store/chars'
 import CharacterFeed from './CharHome'
+import PostPage from './PostPage'
+import ProfilePage from './ProfilePage'
 
 function Pages() {
     return (
@@ -16,6 +18,8 @@ function Pages() {
             <Route exact path='/character-select' component={UserHomeContainer} />
             <Route exact path='/logout' component={Logout} />
             <Route exact path='/home' component={CharacterFeed} />
+            <Route exact path='/posts/:id' component={PostPage} />
+            <Route exact path='/chars/:id' component={ProfilePage} />
         </>
     )
 }

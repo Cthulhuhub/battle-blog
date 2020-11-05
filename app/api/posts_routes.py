@@ -36,8 +36,28 @@ def create_post():
 def newests_posts(page):
     posts = Post.query.order_by(desc('created_at')).offset(page*10).limit(10).all()
 
-    count = Post.query.count()
+    count = get_post_count()
 
     posts_data = [post.to_dict() for post in posts]
     posts_data.append({ 'count': count })
+
     return jsonify(posts_data)
+
+def get_post_count():
+    return Post.query.count()
+
+
+@posts.route('/<int:id>')
+@jwt_required
+def get_post(id):
+    post = Post.query.get(id)
+
+    return jsonify(post.to_dict())
+
+
+@posts.route('/character/<int:id>')
+@jwt_required
+def get_char_posts(id):
+    posts = Post.query.filter_by(id=id).all()
+
+    return jsonify([post.to_dict() for post in posts])
