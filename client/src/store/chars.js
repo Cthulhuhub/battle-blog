@@ -32,10 +32,18 @@ export const loadChars = (userId) => async (dispatch, getState) => {
     }
 }
 
+export const activateChar = (char) => async dispatch => {
+    dispatch(setChar(char))
+}
+
 export default function charsReducer(state = {}, action) {
     switch(action.type) {
         case SET_ALL_CHARS:
             return { ...state, user_chars: action.chars }
+        case SET_CHAR:
+            return { ...state, current_char: action.char }
+        case UNSET_ALL_CHARS:
+            return {}
         default:
             return { ...state }
     }

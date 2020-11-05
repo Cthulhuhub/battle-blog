@@ -9,7 +9,7 @@ function Login() {
     const history = useHistory()
 
     if (user) {
-        history.push('/home')
+        history.push('/character-select')
     }
 
     const [username, setUsername] = useState('')
@@ -29,7 +29,7 @@ function Login() {
         const res = await checker(username, password)
         console.log(res)
         if (res === 200) {
-            history.push('/')
+            history.push('/character-select')
         }
     }
 

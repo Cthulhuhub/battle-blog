@@ -7,6 +7,7 @@ from app import app, db
 from app.models import User, Character, Post, Like, follows
 from gensim.parsing.preprocessing import remove_stopwords
 from collections import Counter
+import datetime
 
 content1 = 'Him rendered may attended concerns jennings reserved now. Sympathize did now preference unpleasing mrs few. Mrs for hour game room want are fond dare. For detract charmed add talking age. Shy resolution instrument unreserved man few. She did open find pain some out.'
 
@@ -72,7 +73,8 @@ with app.app_context():
         title='First seeded post',
         content=content1,
         most_used_words=content1,
-        like_count=0
+        like_count=0,
+        created_at=datetime.datetime.now()
     )
 
     post2 = Post(
@@ -80,7 +82,8 @@ with app.app_context():
         title='Second seeded post',
         content=content2,
         most_used_words=content2,
-        like_count=0
+        like_count=0,
+        created_at=datetime.datetime.now()
     )
 
     post3 = Post(
@@ -88,7 +91,8 @@ with app.app_context():
         title='Third seeded post',
         content=content3,
         most_used_words=content3,
-        like_count=0
+        like_count=0,
+        created_at=datetime.datetime.now()
     )
 
     post4 = Post(
@@ -96,7 +100,8 @@ with app.app_context():
         title='Fourth seeded post',
         content=content4,
         most_used_words=content4,
-        like_count=0
+        like_count=0,
+        created_at=datetime.datetime.now()
     )
 
     # follow1 = follows(

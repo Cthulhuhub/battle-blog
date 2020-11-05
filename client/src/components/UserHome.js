@@ -1,14 +1,13 @@
 import React from 'react'
+import CharacterCard from './CharacterCard'
 
 function UserHome({ user, chars }) {
     console.log(chars)
     return (
         <>
-            <h1>Welcome {user ? user.username : ''}</h1>
+            <h1>Select a character</h1>
             <div className='chars-list-container'>
-                <ul className='chars-list'>
-                    {chars.map(char => <li className="chars-list__char" key={char.id}>{char.name}</li>)}
-                </ul>
+                {chars.map(char => <CharacterCard char={char} />)}
             </div>
         </>
     )

@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
-from app.models import db, Post, Character, Follow
+from app.models import db, Post, Character
 from flask_jwt_extended import jwt_required
+from sqlalchemy import desc
 
 # pylint: skip-file
 
@@ -28,3 +29,12 @@ def create_post():
         return {'msg':'Please fill in all fields'}, 400
 
     return jsonify(new_post.to_dict())
+
+
+@posts.route('/newest-posts/<int:page>')
+@jwt_required
+def newests_posts(page):
+    print('PAGE NUMBER: ', page)
+    posts = Post.query.order_by(desc('created_at')).offset(page*10).limit(10).all()
+    print(posts)
+    return jsonify([post.to_dict() for post in posts])

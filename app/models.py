@@ -83,7 +83,7 @@ class Character(db.Model):
             'name': self.name,
             'bio': self.bio,
             'class_name': self.class_name,
-            'like_count': self.follower_count,
+            'follower_count': self.follower_count,
             'creator': self.creator.to_dict()
         }
 
@@ -97,6 +97,7 @@ class Post(db.Model):
     content = db.Column(db.String(2000), nullable=False)
     _most_used_words = db.Column(db.String(), nullable=False)
     _like_count = db.Column(db.Integer, nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False)
 
     @property
     def like_count(self):
@@ -131,6 +132,7 @@ class Post(db.Model):
             'content': self.content,
             'most_used_words': self.most_used_words,
             'like_count': self.like_count,
+            'created_at': self.created_at,
             'author': self.author.to_dict()
         }
 

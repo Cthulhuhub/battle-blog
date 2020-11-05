@@ -10,7 +10,6 @@ chars = Blueprint('chars', __name__, url_prefix='/api/chars')
 @chars.route('/<int:id>')
 @jwt_required
 def user_chars(id):
-    print('Here')
     characters = Character.query.filter_by(user_id=id).all()
 
     return jsonify(characters=[character.to_dict() for character in characters])

@@ -6,27 +6,34 @@ import UserHome from './UserHome'
 
 function UserHomeContainer() {
     let user = useSelector(state => state.auth.user)
+    const chars = useSelector(state => state.chars.user_chars)
 
-        const history = useHistory()
-        const dispatch = useDispatch()
+    const history = useHistory()
+    const dispatch = useDispatch()
 
+    useEffect(() => {
+        dispatch(loadChars(user.id))
+    }, [])
+
+    if (!user) {
+        user = JSON.parse(window.localStorage.getItem('USER'))
+        console.log(user)
         if (!user) {
-            user = JSON.parse(window.localStorage.getItem('USER'))
-            console.log(user)
-            if (!user) {
-                history.push('/login')
-            }
+            history.push('/login')
         }
+    }
 
-        useEffect(() => {
-            dispatch(loadChars(user.id))
-        }, [])
 
-        const chars = useSelector(state => state.chars.user_chars)
+    if (!user || !chars) {
+        return <></>
+    }
 
-        return (
-            <UserHome chars={chars.characters} user={user} />
-        )
+
+    console.log(chars)
+
+    return (
+        <UserHome chars={chars.characters} user={user} />
+    )
 }
 
 export default UserHomeContainer
