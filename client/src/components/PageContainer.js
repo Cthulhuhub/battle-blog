@@ -27,7 +27,7 @@ function Logout() {
     useEffect(() => {
         dispatch(logout())
         dispatch(unsetAllChars())
-    }, [])
+    }, [dispatch])
 
     history.push('/')
 

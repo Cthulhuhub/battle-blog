@@ -104,10 +104,68 @@ with app.app_context():
         created_at=datetime.datetime.now()
     )
 
-    # follow1 = follows(
-    #     leader_id=1,
-    #     follower_id=2
-    # )
+    post5 = Post(
+        character_id=1,
+        title='Fifth seeded post',
+        content=content1,
+        most_used_words=content1,
+        like_count=0,
+        created_at=datetime.datetime.now()
+    )
+
+    post6 = Post(
+        character_id=2,
+        title='Sixth seeded post',
+        content=content2,
+        most_used_words=content2,
+        like_count=0,
+        created_at=datetime.datetime.now()
+    )
+
+    post7 = Post(
+        character_id=3,
+        title='Seventh seeded post',
+        content=content3,
+        most_used_words=content3,
+        like_count=0,
+        created_at=datetime.datetime.now()
+    )
+
+    post8 = Post(
+        character_id=4,
+        title='Eight seeded post',
+        content=content4,
+        most_used_words=content4,
+        like_count=0,
+        created_at=datetime.datetime.now()
+    )
+
+    post9 = Post(
+        character_id=1,
+        title='Ninth seeded post',
+        content=content1,
+        most_used_words=content1,
+        like_count=0,
+        created_at=datetime.datetime.now()
+    )
+
+    post10 = Post(
+        character_id=2,
+        title='Tenth seeded post',
+        content=content2,
+        most_used_words=content2,
+        like_count=0,
+        created_at=datetime.datetime.now()
+    )
+
+    post11 = Post(
+        character_id=3,
+        title='Eleventh seeded post',
+        content=content3,
+        most_used_words=content3,
+        like_count=0,
+        created_at=datetime.datetime.now()
+    )
 
     db.session.add(user1)
     db.session.add(user2)
@@ -122,7 +180,12 @@ with app.app_context():
     db.session.add(post2)
     db.session.add(post3)
     db.session.add(post4)
-
-    # db.session.add(follow1)
+    db.session.add(post5)
+    db.session.add(post6)
+    db.session.add(post7)
+    db.session.add(post8)
+    db.session.add(post9)
+    db.session.add(post10)
+    db.session.add(post11)
 
     db.session.commit()

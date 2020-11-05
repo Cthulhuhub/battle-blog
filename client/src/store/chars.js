@@ -23,12 +23,14 @@ export const loadChars = (userId) => async (dispatch, getState) => {
         }
     }
 
-    const res = await fetch(`/api/chars/${userId}`, {
-        headers: { Authorization: `Bearer ${token}`}
-    })
-    if (res.ok) {
-        const chars = await res.json()
-        dispatch(setAllChars(chars))
+    if (userId) {
+        const res = await fetch(`/api/chars/${userId}`, {
+            headers: { Authorization: `Bearer ${token}`}
+        })
+        if (res.ok) {
+            const chars = await res.json()
+            dispatch(setAllChars(chars))
+        }
     }
 }
 

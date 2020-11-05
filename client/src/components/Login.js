@@ -20,14 +20,12 @@ function Login() {
 
     async function checker(username, password) {
         const res = await loginDispatcher(username, password)
-        console.log(res)
         return res.status
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         const res = await checker(username, password)
-        console.log(res)
         if (res === 200) {
             history.push('/character-select')
         }

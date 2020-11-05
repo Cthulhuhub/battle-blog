@@ -17,7 +17,6 @@ function UserHomeContainer() {
 
     if (!user) {
         user = JSON.parse(window.localStorage.getItem('USER'))
-        console.log(user)
         if (!user) {
             history.push('/login')
         }
@@ -28,11 +27,8 @@ function UserHomeContainer() {
         return <></>
     }
 
-
-    console.log(chars)
-
     return (
-        <UserHome chars={chars.characters} user={user} />
+        <UserHome chars={chars.characters} />
     )
 }
 

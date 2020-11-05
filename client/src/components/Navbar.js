@@ -6,7 +6,6 @@ import { loadChars } from '../store/chars'
 
 function Navbar() {
     const user = useSelector(state => state.auth.user)
-    const activeChar = useSelector(state => state.chars.current_char)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -21,12 +20,7 @@ function Navbar() {
         <div className='navbar'>
             <ul>
                 <li><NavLink to={ user ? '/logout' : '/login'}>{ user ? 'Logout' : 'Login'}</NavLink></li>
-                <li><NavLink to={ user && !activeChar
-                    ? '/character-select'
-                    : user && activeChar
-                    ? '/home'
-                    : '/'
-                }>
+                <li><NavLink to={ user ? '/character-select' : '/' }>
                     Home
                 </NavLink></li>
             </ul>

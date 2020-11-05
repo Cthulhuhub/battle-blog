@@ -34,7 +34,10 @@ def create_post():
 @posts.route('/newest-posts/<int:page>')
 @jwt_required
 def newests_posts(page):
-    print('PAGE NUMBER: ', page)
     posts = Post.query.order_by(desc('created_at')).offset(page*10).limit(10).all()
-    print(posts)
-    return jsonify([post.to_dict() for post in posts])
+
+    count = Post.query.count()
+
+    posts_data = [post.to_dict() for post in posts]
+    posts_data.append({ 'count': count })
+    return jsonify(posts_data)

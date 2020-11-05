@@ -9,7 +9,6 @@ function CharacterCard({ char }) {
     const history = useHistory()
 
     function setActiveChar() {
-        console.log('Worked')
         dispatch(activateChar(char))
         history.push('/home')
     }

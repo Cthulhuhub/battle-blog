@@ -94,7 +94,7 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     character_id = db.Column(db.Integer, db.ForeignKey('characters.id'), nullable=False)
     title = db.Column(db.String(30), nullable=False)
-    content = db.Column(db.String(2000), nullable=False)
+    content = db.Column(db.String(10000), nullable=False)
     _most_used_words = db.Column(db.String(), nullable=False)
     _like_count = db.Column(db.Integer, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False)
