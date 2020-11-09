@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request
 from app.models import db, Post, Character
 from flask_jwt_extended import jwt_required
 from sqlalchemy import desc
-
+import json
 # pylint: skip-file
 
 posts = Blueprint('posts', __name__, url_prefix='/api/posts')
@@ -61,3 +61,21 @@ def get_char_posts(id):
     posts = Post.query.filter_by(id=id).all()
 
     return jsonify([post.to_dict() for post in posts])
+
+
+@posts.route('/related/<int:id>')
+@jwt_required
+def get_related(id):
+    current_post = Post.query.get(id)
+
+    most_used = json.loads(current_post.most_used_words)
+
+    similar = []
+
+    for key, value in most_used.items():
+        res = Post.query.filter(Post._most_used_words.like(f'%{key}%'), Post.id != id).all()
+        similar.extend([post.to_dict() for post in res])
+
+    res_list = [post_dict for post, post_dict in enumerate(similar) if post_dict not in similar[post + 1:]]
+
+    return jsonify(res_list)

@@ -8,15 +8,25 @@ function PostPage() {
     let { id } = useParams();
 
     const [post, setPost] = useState('')
+    const [similarPosts, setSimilarPosts] = useState('')
 
     useEffect(() => {
         async function getPost() {
-            const res = await fetch(`/api/posts/${id}`, {
+            const postRes = await fetch(`/api/posts/${id}`, {
                 headers: { Authorization: `Bearer ${token}`}
             })
 
-            if (res.ok) {
-                const currPost = await res.json()
+            const similarRes = await fetch(`/api/posts/related/${id}`, {
+                headers: { Authorization: `Bearer ${token}` }
+            })
+
+            if (postRes.ok && similarRes.ok) {
+                const currPost = await postRes.json()
+                const similar = await similarRes.json()
+                setPost(currPost)
+                setSimilarPosts(similar)
+            } else if (postRes.ok) {
+                const currPost = await postRes.json()
                 setPost(currPost)
             } else {
                 history.push('/404')
@@ -30,9 +40,22 @@ function PostPage() {
 
     return (
         <div className='post-page-container'>
-            <div className='author-blurb'>
-                <h2><NavLink to={`/chars/${post.author.id}`}>{post.author.name}</NavLink></h2>
-                <p>{post.author.bio.substring(0, 50)}</p>
+            <div className='author-and-similar'>
+                <div className='author-blurb'>
+                    <h2><NavLink to={`/chars/${post.author.id}`}>{post.author.name}</NavLink></h2>
+                    <p>{post.author.bio.substring(0, 50)}</p>
+                </div>
+                { similarPosts
+                    ? <div className='similar-posts'>
+                        <h3>Similar Posts</h3>
+                        <ul>
+                            {similarPosts.map(post => <li key={post.id}>
+                                <NavLink to={`/posts/${post.id}`}>{post.title}</NavLink>
+                            </li>)}
+                        </ul>
+                    </div>
+                    : <></>
+                }
             </div>
             <div className='post-zone'>
                 <h1>{post.title}</h1>

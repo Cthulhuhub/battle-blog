@@ -30,8 +30,8 @@ def signup():
 @bp.route('/login', methods=['POST'])
 def login():
     incoming = request.get_json()
-    user = User.query.filter_by(username=incoming['username']).one()
-    print(user.check_password(incoming['password']))
+    user = User.query.filter_by(username=incoming['username']).first()
+
     if user and user.check_password(incoming['password']):
         token = create_access_token(identity=user.username)
         return jsonify(user=user.to_dict(), token=token)

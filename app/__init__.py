@@ -14,6 +14,7 @@ from .api import char_routes, posts_routes
 app = Flask(__name__)
 
 app.config.from_object(Config)
+app.config['JSON_SORT_KEYS'] = False
 
 db.init_app(app)
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import { login } from '../store/auth'
 
 function Login() {
@@ -45,15 +45,16 @@ function Login() {
             <div className='form_container'>
                 <form action='/login' method='post' onSubmit={handleSubmit}>
                     <div>
-                        <label for='username'>Username: </label>
+                        <label htmlFor='username'>Username: </label>
                         <input type='text' value={username} name='username' onChange={updateUsername}></input>
                     </div>
                     <div>
-                        <label for='password'>Password: </label>
+                        <label htmlFor='password'>Password: </label>
                         <input type='password' value={password} name='password' onChange={updatePassword}></input>
                     </div>
                     <button type='submit'>Log in</button>
                 </form>
+                <small>Don't have an account? <NavLink to='/signup'>Sign up</NavLink></small>
             </div>
         </>
     )

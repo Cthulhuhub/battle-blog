@@ -52,6 +52,8 @@ export const login = (username, password) => async dispatch => {
         dispatch(setToken(token))
         dispatch(setUser(user))
         return { status: 200 }
+    } else {
+        return { status: 400 }
     }
 }
 
@@ -68,10 +70,32 @@ export const logout = () => async (dispatch, getState) => {
         window.localStorage.removeItem('USER');
         dispatch(removeAuth())
         dispatch(unsetAllChars())
+    } else {
+        return { states: 400 }
+    }
+}
+
+export const signup = (username, email, password) => async dispatch => {
+
+    const res = await fetch('/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, email, password })
+    })
+    console.log(res)
+    if (res.ok) {
+        const { user, token } = await res.json();
+        window.localStorage.setItem('TOKEN', token)
+        window.localStorage.setItem('USER', JSON.stringify(user))
+        dispatch(setToken(token))
+        dispatch(setUser(user))
+        return { status: 200 }
     }
 }
 
 export default function authReducer(state = {}, action) {
+    console.log(action.token)
+    console.log(action.user)
     switch (action.type) {
       case SET_USER:
         return { ...state, user: action.user };

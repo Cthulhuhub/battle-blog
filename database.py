@@ -71,8 +71,8 @@ with app.app_context():
     post1 = Post(
         character_id=1,
         title='First seeded post',
-        content=content1,
-        most_used_words=content1,
+        content=content1  + ' banana banana banana banana banana banana',
+        most_used_words=content1   + ' banana banana banana banana banana banana',
         like_count=0,
         created_at=datetime.datetime.now()
     )
@@ -80,8 +80,8 @@ with app.app_context():
     post2 = Post(
         character_id=2,
         title='Second seeded post',
-        content=content2,
-        most_used_words=content2,
+        content=content2  + ' banana banana banana banana banana banana',
+        most_used_words=content2   + ' banana banana banana banana banana banana',
         like_count=0,
         created_at=datetime.datetime.now()
     )

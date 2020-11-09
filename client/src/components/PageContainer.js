@@ -9,6 +9,7 @@ import { unsetAllChars } from '../store/chars'
 import CharacterFeed from './CharHome'
 import PostPage from './PostPage'
 import ProfilePage from './ProfilePage'
+import SignUp from './Signup'
 
 function Pages() {
     return (
@@ -20,6 +21,7 @@ function Pages() {
             <Route exact path='/home' component={CharacterFeed} />
             <Route exact path='/posts/:id' component={PostPage} />
             <Route exact path='/chars/:id' component={ProfilePage} />
+            <Route exact path='/signup' component={SignUp} />
         </>
     )
 }
