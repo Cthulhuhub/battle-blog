@@ -40,12 +40,9 @@ function CharacterFeed() {
         return <></>
     }
 
-    // let postCount;
-
     if (posts[posts.length - 1].count) {
         posts.pop()
     }
-    // postCount = ''
 
     return (
         <>
@@ -59,7 +56,6 @@ function CharacterFeed() {
                 <button value={page} onClick={changePage}>{'<'}</button>
                 <button value='page-count' onClick={changePage}>{page + 1}</button>
                 <button value={page + 1} onClick={changePage}>{'>'}</button>
-                {/* <button value={postCount} onClick={changePage}>{'>>'}</button> */}
             </div>
         </>
     )

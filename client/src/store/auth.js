@@ -76,13 +76,12 @@ export const logout = () => async (dispatch, getState) => {
 }
 
 export const signup = (username, email, password) => async dispatch => {
-
     const res = await fetch('/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, email, password })
     })
-    console.log(res)
+
     if (res.ok) {
         const { user, token } = await res.json();
         window.localStorage.setItem('TOKEN', token)
@@ -94,8 +93,7 @@ export const signup = (username, email, password) => async dispatch => {
 }
 
 export default function authReducer(state = {}, action) {
-    console.log(action.token)
-    console.log(action.user)
+
     switch (action.type) {
       case SET_USER:
         return { ...state, user: action.user };

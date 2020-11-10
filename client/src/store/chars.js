@@ -38,6 +38,30 @@ export const activateChar = (char) => async dispatch => {
     dispatch(setChar(char))
 }
 
+export const createChar = (char) => async (dispatch, getState) => {
+    let { auth: { token } } = getState()
+    if (!token) {
+        token = window.localStorage.getItem('TOKEN')
+        if (!token) {
+            return;
+        }
+    }
+
+    const res = await fetch('/api/chars/create', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(char)
+    })
+
+    if (res.ok) {
+        dispatch(setChar(char))
+        return { status: 200 }
+    }
+}
+
 export default function charsReducer(state = {}, action) {
     switch(action.type) {
         case SET_ALL_CHARS:

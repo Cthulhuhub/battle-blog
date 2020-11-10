@@ -10,6 +10,8 @@ import CharacterFeed from './CharHome'
 import PostPage from './PostPage'
 import ProfilePage from './ProfilePage'
 import SignUp from './Signup'
+import CreateCharacter from './CreateCharacter'
+import CreatePost from './CreatePost'
 
 function Pages() {
     return (
@@ -22,6 +24,8 @@ function Pages() {
             <Route exact path='/posts/:id' component={PostPage} />
             <Route exact path='/chars/:id' component={ProfilePage} />
             <Route exact path='/signup' component={SignUp} />
+            <Route exact path='/create' component={CreateCharacter} />
+            <Route exact path='/new-post' component={CreatePost} />
         </>
     )
 }

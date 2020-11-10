@@ -1,0 +1,35 @@
+.navbar {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    border-bottom: 1px solid rgb(253, 221, 179);
+    background-color: rgb(255, 247, 235);
+}
+
+.feed-link {
+    margin-left: 2%;
+}
+
+.login {
+    margin-left: auto;
+    margin-right: 3%;
+    box-sizing: border-box;
+    background-color: rgb(255, 231, 200);
+    border: 1px solid rgb(253, 221, 179);
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.logo {
+   max-width: 100px;
+   max-height: 100px;
+}
+
+.active-nav {
+    text-decoration: underline rgba(0, 0, 0, 0.35);
+}
+
+.new-post-link {
+    margin-left: 2%;
+}

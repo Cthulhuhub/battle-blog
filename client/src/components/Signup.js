@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import signup from '../store/auth'
+import  { signup } from '../store/auth'
 
 function SignUp() {
     const user = useSelector(state => state.auth.user)
 
-    const [username, setUsername] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [confirmedPassword, setConfirmedPassowrd] = useState('')
+    const [username, setUsername] = useState('testsignup')
+    const [email, setEmail] = useState('fake@email.com')
+    const [password, setPassword] = useState('password1')
+    const [confirmedPassword, setConfirmedPassowrd] = useState('password1')
 
     const history = useHistory()
     const dispatch = useDispatch()
@@ -18,15 +18,12 @@ function SignUp() {
         history.push('/character-select')
     }
 
-    function handleSubmit() {
-        if ((username && email && password && confirmedPassword) && (password === confirmedPassword)) {
-            dispatch(signup(username, email, password))
-        }
+    function handleSubmit(e) {
+        e.preventDefault();
+        dispatch(signup(username, email, password))
     }
 
     function handleChange(e) {
-        e.preventDefault();
-
         switch (e.target.id) {
             case 'username':
                 setUsername(e.target.value)
@@ -47,7 +44,7 @@ function SignUp() {
 
     return (
         <div className='form-container'>
-            <form onSubmit={handleSubmit} action='post' method='/signup'>
+            <form action='/signup' method='post' onSubmit={handleSubmit}>
                 <div className='form-box username-box'>
                     <label htmlFor='username'>Username: </label>
                     <input type='text' id='username' value={username} onChange={handleChange}></input>
