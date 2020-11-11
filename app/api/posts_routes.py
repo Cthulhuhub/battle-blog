@@ -3,6 +3,7 @@ from app.models import db, Post, Character
 from flask_jwt_extended import jwt_required
 from sqlalchemy import desc
 import json
+import datetime
 # pylint: skip-file
 
 posts = Blueprint('posts', __name__, url_prefix='/api/posts')
@@ -11,21 +12,22 @@ posts = Blueprint('posts', __name__, url_prefix='/api/posts')
 @posts.route('/create', methods=['POST'])
 @jwt_required
 def create_post():
-    incoming = request.json()
+    incoming = request.get_json()
 
     new_post = Post(
         character_id=incoming['character_id'],
         title=incoming['title'],
         content=incoming['content'],
         most_used_words=incoming['content'],
-        like_count=0
+        like_count=0,
+        created_at=datetime.datetime.now()
     )
 
     db.session.add(new_post)
 
     try:
         db.session.commit()
-    except IntegrityError:
+    except:
         return {'msg':'Please fill in all fields'}, 400
 
     return jsonify(new_post.to_dict())
@@ -58,7 +60,7 @@ def get_post(id):
 @posts.route('/character/<int:id>')
 @jwt_required
 def get_char_posts(id):
-    posts = Post.query.filter_by(id=id).all()
+    posts = Post.query.filter_by(character_id=id).order_by(desc('created_at')).all()
 
     return jsonify([post.to_dict() for post in posts])
 

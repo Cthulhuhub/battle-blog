@@ -15,8 +15,7 @@ function CharacterCard({ char }) {
 
     return (
         <div className="character-card" onClick={setActiveChar}>
-            <h2>{char.name}</h2>
-            <h3>{char.class_name}</h3>
+            <h2>{char.name} - {char.class_name}</h2>
             <p>{char.bio}</p>
         </div>
     )

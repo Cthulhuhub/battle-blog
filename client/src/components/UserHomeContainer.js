@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { loadChars } from '../store/chars'
 import UserHome from './UserHome'
+import '../style/charselect.css'
 
 function UserHomeContainer() {
     let user = useSelector(state => state.auth.user)
@@ -32,7 +33,6 @@ function UserHomeContainer() {
     return (
         <>
             <UserHome chars={chars.characters} />
-            <button onClick={() => history.push('/create')}>Create new character</button>
         </>
     )
 }

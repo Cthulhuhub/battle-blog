@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import Post from './Post'
+import '../style/feed.css'
 
 function CharacterFeed() {
     const { user, token } = useSelector(state => state.auth)

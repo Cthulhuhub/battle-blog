@@ -10,6 +10,8 @@ body {
     font-family: 'Lato', sans-serif;
     background-color: rgb(228, 217, 200);
     margin: 0px;
+    width: 99vw;
+    overflow: auto;
 }
 
 a {

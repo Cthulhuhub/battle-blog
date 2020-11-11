@@ -1,0 +1,35 @@
+.selector-wrap {
+    display: flex;
+    flex-direction: column;
+}
+
+.selector-wrap > h1 {
+    align-self: center;
+}
+
+.character-card {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 10px;
+    background-color: rgb(255, 247, 235);
+    box-sizing: border-box;
+    border: 1px solid rgb(253, 221, 179);
+    border-radius: 5px;
+}
+
+.character-card > h2, p {
+    word-wrap: break-word;
+    padding: 0px 20px;
+}
+
+.character-card:hover {
+    transition-duration: 0.5s;
+    transform: scale(1.1, 1.1);
+    cursor: pointer;
+}
+
+#char-create-button {
+    align-self: center;
+    width: 10%;
+    height: 30px;
+}

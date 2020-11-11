@@ -34,7 +34,7 @@ def create_char():
     new_char = Character(
         user_id=incoming['user_id'],
         name=incoming['name'],
-        bio=incoming['name'],
+        bio=incoming['bio'],
         class_name=incoming['class_name'],
         follower_count=0
     )
@@ -43,7 +43,7 @@ def create_char():
 
     try:
         db.session.commit()
-    except IntegrityError:
+    except:
         return {'msg': 'Please fill in all fields'}, 400
 
     return jsonify(new_char.to_dict()), 200
