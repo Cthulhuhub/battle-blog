@@ -5,6 +5,7 @@
     flex-direction: row;
     border-bottom: 1px solid rgb(253, 221, 179);
     background-color: rgb(255, 247, 235);
+    width: 100vw;
 }
 
 .feed-link {

@@ -1,0 +1,36 @@
+.img-container {
+    height: 700px;
+}
+
+.logo-box {
+    background-image: url('./bblogo.png');
+    background-size: 300px 200px;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 300px;
+    height: 200px;
+    margin: 0 auto;
+    padding-top: 275px;
+}
+
+.gif-box {
+    width: 100vw;
+    height: 700px;
+    background-image: url('./1WJOC1s.gif');
+    background-repeat: no-repeat;
+    background-size: 100vw auto;
+}
+
+.home-title {
+    text-align: center;
+    background-color: crimson;
+    margin-top: 40px;
+    padding: 0.01em 0;
+}
+
+.text-areas {
+    margin-top: 2%;
+    margin-left: 5%;
+    display: inline-block;
+    width: 100vw;
+}

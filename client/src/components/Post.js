@@ -8,7 +8,7 @@ function Post({ post }) {
                 <h2><NavLink to={`/posts/${post.id}`}>{post.title}</NavLink></h2>
                 <p>{post.content}</p>
             </div>
-            <p><small><NavLink to={`/chars/${post.author.id}`}>{post.author.name}</NavLink> - {post.created_at.substring(0, 12)}</small></p>
+            <p className="post-info"><small><NavLink to={`/chars/${post.author.id}`}>{post.author.name}</NavLink> - {post.created_at.substring(0, 12)}</small></p>
         </div>
     )
 }

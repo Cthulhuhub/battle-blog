@@ -48,15 +48,21 @@ function CharacterFeed() {
     return (
         <>
             <div className='posts-container'>
-                {posts.map(post => (
-                    <Post post={post} key={post.id} />
-                ))}
-            </div>
-            <div className='page-controls'>
-                <button value='1' onClick={changePage}>{'<<'}</button>
-                <button value={page} onClick={changePage}>{'<'}</button>
-                <button value='page-count' onClick={changePage}>{page + 1}</button>
-                <button value={page + 1} onClick={changePage}>{'>'}</button>
+                <div className='char-snippet'>
+                    <h2>{activeChar.name}</h2>
+                    <h4>{activeChar.class_name}</h4>
+                    <div className='page-controls'>
+                        <button value='1' onClick={changePage}>{'<<'}</button>
+                        <button value={page} onClick={changePage}>{'<'}</button>
+                        <button value='page-count' onClick={changePage}>{page + 1}</button>
+                        <button value={page + 1} onClick={changePage}>{'>'}</button>
+                    </div>
+                </div>
+                <div className='inner-posts-container'>
+                    {posts.map(post => (
+                        <Post post={post} key={post.id} />
+                    ))}
+                </div>
             </div>
         </>
     )
