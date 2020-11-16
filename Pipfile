@@ -5,6 +5,7 @@ verify_ssl = true
 
 [dev-packages]
 pylint = "*"
+psycopg2-binary = "*"
 
 [packages]
 python-dotenv = "*"
@@ -18,7 +19,12 @@ wtforms = "*"
 flask-migrate = "*"
 flask-jwt-extended = "*"
 gensim = "*"
-psycopg2-binary = "*"
+click = "*"
+gunicorn = "*"
+itsdangerous = "*"
+six = "*"
+markupsafe = "*"
+requests = "*"
 
 [requires]
 python_version = "3.8"
