@@ -52,8 +52,9 @@ function CreatePost() {
     }
 
     return (
-        <div className='create-post-container'>
+        <div className='create-post-container form-container'>
             <form method='post' action='/create-post' onSubmit={handleSubmit}>
+                <h1>New Post</h1>
                 { ok ? <></> : <h3>Something went wrong, please try again.</h3>}
                 <div className='form-box'>
                     <label for='title'>Title</label>

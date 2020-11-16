@@ -75,7 +75,7 @@ def get_related(id):
     similar = []
 
     for key, value in most_used.items():
-        res = Post.query.filter(Post._most_used_words.like(f'%{key}%'), Post.id != id).all()
+        res = Post.query.filter(Post._most_used_words.like(f'%"{key}"%'), Post.id != id).all()
         similar.extend([post.to_dict() for post in res])
 
     res_list = [post_dict for post, post_dict in enumerate(similar) if post_dict not in similar[post + 1:]]

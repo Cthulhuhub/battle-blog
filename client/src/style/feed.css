@@ -47,6 +47,7 @@
 
 .char-snippet {
     margin: 20px;
+    min-width: 200px;
     background-color: rgb(228, 217, 200);
     border-radius: 5px;
     display: flex;

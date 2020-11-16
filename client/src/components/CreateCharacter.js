@@ -41,9 +41,9 @@ function CreateCharacter() {
 
     return (
         <>
-            <h1>Create a new Character!</h1>
-            <div className='char-form-container'>
+            <div className='char-form-container form-container'>
                 <form method='post' action='/create' onSubmit={handleSubmit}>
+                    <h1>Create a new Character!</h1>
                     <div className='form-box'>
                         <label htmlFor='name'>Name: </label>
                         <input id='name' type='text' value={name} onChange={handleChange}></input>

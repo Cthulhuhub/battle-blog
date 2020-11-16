@@ -9,13 +9,6 @@ from collections import Counter
 
 db = SQLAlchemy()
 
-
-
-
-
-
-
-
 follows = db.Table('follows',
     db.Column('leader_id', db.Integer, db.ForeignKey('characters.id'), primary_key=True),
     db.Column('follower_id', db.Integer, db.ForeignKey('characters.id'), primary_key=True)

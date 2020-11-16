@@ -6,10 +6,10 @@ import  { signup } from '../store/auth'
 function SignUp() {
     const user = useSelector(state => state.auth.user)
 
-    const [username, setUsername] = useState('testsignup')
-    const [email, setEmail] = useState('fake@email.com')
-    const [password, setPassword] = useState('password1')
-    const [confirmedPassword, setConfirmedPassowrd] = useState('password1')
+    const [username, setUsername] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [confirmedPassword, setConfirmedPassowrd] = useState('')
 
     const history = useHistory()
     const dispatch = useDispatch()
@@ -44,21 +44,22 @@ function SignUp() {
 
     return (
         <div className='form-container'>
-            <form action='/signup' method='post' onSubmit={handleSubmit}>
+            <form action='/signup' method='post' onSubmit={handleSubmit} class='forms signup-form'>
+                <h1>Sign Up</h1>
                 <div className='form-box username-box'>
-                    <label htmlFor='username'>Username: </label>
+                    <label htmlFor='username'>Username </label>
                     <input type='text' id='username' value={username} onChange={handleChange}></input>
                 </div>
                 <div className='form-box email-box'>
-                    <label htmlFor='email'>Email: </label>
+                    <label htmlFor='email'>Email </label>
                     <input type='email' id='email' value={email} onChange={handleChange}></input>
                 </div>
                 <div className='form-box password-box'>
-                    <label htmlFor='password'>Password: </label>
+                    <label htmlFor='password'>Password </label>
                     <input type='password' id='password' value={password} onChange={handleChange}></input>
                 </div>
                 <div className='form-box confirm-password-box'>
-                    <label htmlFor='confirm-password'>Confirm password: </label>
+                    <label htmlFor='confirm-password'>Confirm password </label>
                     <input type='password' id='confirm-password' value={confirmedPassword} onChange={handleChange}></input>
                 </div>
                 <button type='submit'>Sign up</button>

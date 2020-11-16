@@ -41,20 +41,20 @@ function Login() {
 
     return (
         <>
-            <h1>Login</h1>
-            <div className='form_container'>
-                <form action='/login' method='post' onSubmit={handleSubmit}>
-                    <div>
-                        <label htmlFor='username'>Username: </label>
+            <div className='form-container'>
+                <form action='/login' method='post' onSubmit={handleSubmit} className='forms login-form'>
+                    <h1>Login</h1>
+                    <div className='form-box'>
+                        <label htmlFor='username'>Username </label>
                         <input type='text' value={username} name='username' onChange={updateUsername}></input>
                     </div>
-                    <div>
-                        <label htmlFor='password'>Password: </label>
+                    <div className='form-box'>
+                        <label htmlFor='password'>Password </label>
                         <input type='password' value={password} name='password' onChange={updatePassword}></input>
                     </div>
                     <button type='submit'>Log in</button>
                 </form>
-                <small>Don't have an account? <NavLink to='/signup'>Sign up</NavLink></small>
+                <small id="sign-up-link">Don't have an account? <NavLink to='/signup'>Sign up</NavLink></small>
             </div>
         </>
     )
