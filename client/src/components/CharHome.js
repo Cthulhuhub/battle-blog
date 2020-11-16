@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import Post from './Post'
 import '../style/feed.css'
 
@@ -49,7 +49,7 @@ function CharacterFeed() {
         <>
             <div className='posts-container'>
                 <div className='char-snippet'>
-                    <h2>{activeChar.name}</h2>
+                    <h2><NavLink to={`/chars/${activeChar.id}`}>{activeChar.name}</NavLink></h2>
                     <h4>{activeChar.class_name}</h4>
                     <div className='page-controls'>
                         <button value='1' onClick={changePage}>{'<<'}</button>

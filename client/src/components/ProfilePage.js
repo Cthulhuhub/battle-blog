@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { NavLink, useParams } from 'react-router-dom'
+import '../style/profile.css'
 
 function ProfilePage() {
     const token = useSelector(state => state.auth.token)
@@ -31,28 +32,36 @@ function ProfilePage() {
     }, [id, token])
 
     return (
-        <>
+        <div className="posts-container">
             <div className="profile-container">
-                <h1>{char.name}</h1>
-                    <h3>{char.class_name}</h3>
-                <p>{char.bio}</p>
-            </div>
-            <div className="char-posts-container">
-                <h2>Posts</h2>
-                {posts ? posts.map(post => (
-                    <div key={post.id}>
-                        <h3><NavLink to={`/posts/${id}`}>{post.title}</NavLink></h3>
-                        <p>{post.content}</p>
-                        <p><small>{post.created_at.substring(0, 12)}</small></p>
+                <div className="profile-wrapper">
+                    <h1>{char.name}</h1>
+                    <div className="posts-title">
+                        <h3>{char.class_name}</h3>
                     </div>
-                ))
-                :
-                    <>
-                        <h2>This character hasn't posted yet</h2>
-                    </>
-                }
+                    <h3>Posts</h3>
+                    <div className="char-posts-list">
+                        {posts ? posts.map(post => (
+                            <div key={post.id} className="char-post-wrapper">
+                                <h4><NavLink to={`/posts/${id}`}>{post.title}</NavLink></h4>
+                                <p><small>{post.created_at.substring(0, 12)}</small></p>
+                            </div>
+                        ))
+                        :
+                            <>
+                                <h2>This character hasn't posted yet</h2>
+                            </>
+                        }
+                    </div>
+                </div>
             </div>
-        </>
+            <div className="char-bio-container inner-posts-container">
+                <div className="bio-wrapper">
+                    <h2>Bio</h2>
+                    <p>{char.bio}</p>
+                </div>
+            </div>
+        </div>
     )
 }
 
