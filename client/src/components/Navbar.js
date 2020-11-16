@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { loadUser } from '../store/auth'
 import { loadChars } from '../store/chars'
 import '../style/navbar.css'
-import logo from '../style/bblogo.png'
+import logo from '../images/bblogo.png'
 
 function Navbar() {
     const user = useSelector(state => state.auth.user)

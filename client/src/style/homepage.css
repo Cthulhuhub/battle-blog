@@ -3,7 +3,7 @@
 }
 
 .logo-box {
-    background-image: url('./bblogo.png');
+    background-image: url('../images/bblogo.png');
     background-size: 300px 200px;
     background-repeat: no-repeat;
     background-position: center;
@@ -16,7 +16,7 @@
 .gif-box {
     width: 100vw;
     height: 700px;
-    background-image: url('./1WJOC1s.gif');
+    background-image: url('../images/flyingdragonbreathgif.gif');
     background-repeat: no-repeat;
     background-size: 100vw auto;
 }
