@@ -7,11 +7,11 @@ A microblogging site, except its all fantasy characters
 - Characters can create text posts about adventures
 - Posts will automatically generate links to other relevant posts based on word matching
 - Characters will have class selection
-- Searching for other characters
 - Character profile pages
 - Comments
 
 ## Additional features
+- Searching for other characters
 - Characters can follow other characters for a personalized home page
   - Different characters can have different home page content
 - Character generator

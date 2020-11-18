@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from app.models import db, Post, Character
+from app.models import db, Post, Character, Comment
 from flask_jwt_extended import jwt_required
 from sqlalchemy import desc
 import json
@@ -81,3 +81,33 @@ def get_related(id):
     res_list = [post_dict for post, post_dict in enumerate(similar) if post_dict not in similar[post + 1:]]
 
     return jsonify(res_list)
+
+
+@posts.route('/<int:id>/comments')
+@jwt_required
+def get_comments(id):
+    comments = Comment.query.filter_by(post_id=id).order_by(desc('created_at')).all()
+
+    return jsonify([comment.to_dict() for comment in comments])
+
+
+@posts.route('/comment', methods=['POST'])
+@jwt_required
+def create_comment():
+    incoming = request.get_json()
+    print(incoming)
+    new_comment = Comment(
+        character_id=incoming['character_id'],
+        post_id=incoming['post_id'],
+        content=incoming['content'],
+        created_at=datetime.datetime.now()
+    )
+
+    db.session.add(new_comment)
+
+    try:
+        db.session.commit()
+    except:
+        return {'msg':'Invalid comment'}, 400
+
+    return jsonify(new_comment.to_dict())

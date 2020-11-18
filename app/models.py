@@ -68,6 +68,7 @@ class Character(db.Model):
     )
 
     likes = db.relationship('Like', back_populates='character')
+    comments = db.relationship('Comment')
 
     def to_dict(self):
         return {
@@ -116,6 +117,7 @@ class Post(db.Model):
 
     author = db.relationship('Character')
     likes = db.relationship('Like', back_populates='post')
+    commnets = db.relationship('Comment')
 
     def to_dict(self):
         return {
@@ -140,10 +142,24 @@ class Like(db.Model):
     post = db.relationship('Post', back_populates='likes')
 
 
-# class Follow(db.Model):
-#     __tablename__ = 'follows'
+class Comment(db.Model):
+    __tablename__ = 'comments'
 
-#     leader_id = db.Column(db.Integer, db.ForeignKey('characters.id'), primary_key=True)
-#     follower_id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    character_id = db.Column(db.Integer, db.ForeignKey('characters.id'), nullable=False)
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), nullable=False)
+    content = db.Column(db.String(500), nullable=False)
+    created_at = db.Column(db.DateTime)
 
-#     leader = db.relationship('Character', backref=db.backref('follows'))
+    author = db.relationship('Character')
+    post = db.relationship('Post')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'character_id': self.character_id,
+            'content': self.content,
+            'created_at': self.created_at,
+            'author': self.author.to_dict(),
+            'post': self.post.to_dict()
+        }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { NavLink, useHistory, useParams } from 'react-router-dom'
 import '../style/post.css'
+import Comments from './Comments'
 
 function PostPage() {
     const token = useSelector(state => state.auth.token)
@@ -67,6 +68,7 @@ function PostPage() {
                     </div>
                 </div>
             </div>
+            <Comments id={id} token={token} />
         </div>
     )
 }

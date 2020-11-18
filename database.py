@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from app import app, db
-from app.models import User, Character, Post, Like, follows
+from app.models import User, Character, Post, Like, follows, Comment
 from gensim.parsing.preprocessing import remove_stopwords
 from collections import Counter
 import datetime
@@ -167,6 +167,27 @@ with app.app_context():
         created_at=datetime.datetime.now()
     )
 
+    comment1 = Comment(
+        character_id=1,
+        post_id=1,
+        content="Seeded comment 1",
+        created_at=datetime.datetime.now()
+    )
+
+    comment2 = Comment(
+        character_id=2,
+        post_id=1,
+        content="Seeded comment 2",
+        created_at=datetime.datetime.now()
+    )
+
+    comment3 = Comment(
+        character_id=3,
+        post_id=2,
+        content="Seeded comment 3",
+        created_at=datetime.datetime.now()
+    )
+
     db.session.add(user1)
     db.session.add(user2)
     db.session.add(user3)
@@ -187,5 +208,8 @@ with app.app_context():
     db.session.add(post9)
     db.session.add(post10)
     db.session.add(post11)
+    db.session.add(comment1)
+    db.session.add(comment2)
+    db.session.add(comment3)
 
     db.session.commit()
