@@ -10,6 +10,7 @@ function SignUp() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmedPassword, setConfirmedPassowrd] = useState('')
+    const [signUpFailed, setSignUpFailer] = useState(false)
 
     const history = useHistory()
     const dispatch = useDispatch()
@@ -18,9 +19,21 @@ function SignUp() {
         history.push('/character-select')
     }
 
-    function handleSubmit(e) {
+    const signUpDispatcher = (username, email, password) => dispatch(signup(username, email, password))
+
+    async function handleSubmit(e) {
         e.preventDefault();
-        dispatch(signup(username, email, password))
+        if (password !== confirmedPassword) {
+            setSignUpFailer(true)
+        } else {
+            const res = await signUpDispatcher(username, email, password)
+            if (res.status === 200) {
+                setSignUpFailer(false)
+                history.push('/create')
+            } else {
+                setSignUpFailer(true)
+            }
+        }
     }
 
     function handleChange(e) {
@@ -44,8 +57,15 @@ function SignUp() {
 
     return (
         <div className='form-container'>
-            <form action='/signup' method='post' onSubmit={handleSubmit} class='forms signup-form'>
+            <form action='/signup' method='post' onSubmit={handleSubmit} className='forms signup-form'>
                 <h1>Sign Up</h1>
+                { signUpFailed
+                ?
+                    <div className="failed-submit">
+                        <p className="fail-text">I don't think ya got that quite right there, lad.</p>
+                    </div>
+                : <></>
+                }
                 <div className='form-box username-box'>
                     <label htmlFor='username'>Username </label>
                     <input type='text' id='username' value={username} onChange={handleChange}></input>

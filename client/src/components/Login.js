@@ -14,6 +14,7 @@ function Login() {
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [loginCheck, setLoginCheck] = useState(false)
 
     const dispatch = useDispatch();
     const loginDispatcher = (username, password) => dispatch(login(username, password))
@@ -27,7 +28,10 @@ function Login() {
         e.preventDefault()
         const res = await checker(username, password)
         if (res === 200) {
+            setLoginCheck(false)
             history.push('/character-select')
+        } else {
+            setLoginCheck(true)
         }
     }
 
@@ -36,6 +40,8 @@ function Login() {
         const res = await checker('fakeuser1', 'fakepassword1')
         if (res === 200) {
             history.push('/character-select')
+        } else {
+            setLoginCheck(true)
         }
     }
 
@@ -52,6 +58,13 @@ function Login() {
             <div className='form-container'>
                 <form action='/login' method='post' onSubmit={handleSubmit} className='forms login-form'>
                     <h1>Login</h1>
+                    { loginCheck
+                    ?
+                        <div className="failed-submit">
+                            <p className="fail-text">That was last week's secret phrase, try again.</p>
+                        </div>
+                    : <></>
+                    }
                     <div className='form-box'>
                         <label htmlFor='username'>Username </label>
                         <input type='text' value={username} name='username' onChange={updateUsername}></input>

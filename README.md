@@ -2,21 +2,6 @@
 A microblogging site, except its all fantasy characters
 
 ## Features
-- Character profile creator
-- Users can have, and manage, multiple characters
-- Characters can create text posts about adventures
-- Posts will automatically generate links to other relevant posts based on word matching
-- Characters will have class selection
-- Character profile pages
-- Comments
-
-## Additional features
-- Searching for other characters
-- Characters can follow other characters for a personalized home page
-  - Different characters can have different home page content
-- Character generator
-- Character stats
-- Image uploads/profile pictures
-
-### DB schema
-https://dbdiagram.io/d/5fa06b563a78976d7b7a32cb
+- Users can create and manage several characters, through which they post.
+- Posts automatically generate relevancy links based on frequently used words. These links are generated
+  every time the post is opened, so its always linking to the most closely associated.

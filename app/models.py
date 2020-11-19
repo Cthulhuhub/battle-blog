@@ -39,8 +39,6 @@ class User(db.Model):
     def password(self, password):
         if len(password) > 8 and len(password) < 50:
             self.hashed_password = generate_password_hash(password)
-        else:
-            raise AssertionError('Password must be at leat 8 characters, but no longer than 50')
 
     def check_password(self, password):
         return check_password_hash(self.password, password)

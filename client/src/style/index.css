@@ -99,3 +99,15 @@ textarea {
 .char-form-container {
     width: 40%;
 }
+
+.failed-submit > p {
+    margin-left: 0;
+    padding-left: 0;
+    color: rgb(185, 97, 115);
+    text-align: center;
+}
+
+.failed-submit {
+    background-color: rgb(228, 217, 200);
+    border-radius: 5px;
+}

@@ -16,12 +16,12 @@ def signup():
         password = incoming['password']
     )
 
-    db.session.add(user)
 
     try:
+        db.session.add(user)
         db.session.commit()
-    except IntegrityError:
-        return jsonify(message='User with that email or username already exists'), 409
+    except:
+        return jsonify(message='Invalid credentials'), 400
 
     token = create_access_token(identity=user.username)
     return jsonify(user=user.to_dict(), token=token)

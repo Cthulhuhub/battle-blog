@@ -71,7 +71,7 @@ export const logout = () => async (dispatch, getState) => {
         dispatch(removeAuth())
         dispatch(unsetAllChars())
     } else {
-        return { states: 400 }
+        return { status: 400 }
     }
 }
 
@@ -89,6 +89,8 @@ export const signup = (username, email, password) => async dispatch => {
         dispatch(setToken(token))
         dispatch(setUser(user))
         return { status: 200 }
+    } else {
+        return { status: 400 }
     }
 }
 
