@@ -31,6 +31,14 @@ function Login() {
         }
     }
 
+    const demoLogin = async (e) => {
+        e.preventDefault()
+        const res = await checker('fakeuser1', 'fakepassword1')
+        if (res === 200) {
+            history.push('/character-select')
+        }
+    }
+
     const updateUsername = (e) => {
         setUsername(e.target.value)
     }
@@ -52,7 +60,10 @@ function Login() {
                         <label htmlFor='password'>Password </label>
                         <input type='password' value={password} name='password' onChange={updatePassword}></input>
                     </div>
-                    <button type='submit'>Log in</button>
+                    <div className="login-button-wrapper">
+                        <button type='submit'>Log in</button>
+                        <button id="demo-user-button" onClick={demoLogin}>Demo User</button>
+                    </div>
                 </form>
                 <small id="sign-up-link">Don't have an account? <NavLink to='/signup'>Sign up</NavLink></small>
             </div>

@@ -30,6 +30,19 @@ button {
     border-radius: 5px;
 }
 
+button:hover {
+    cursor: pointer;
+}
+
+#demo-user-button {
+    max-width: 20%;
+}
+
+.login-button-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
 .form-container {
     background-color: rgb(204, 186, 161);
     width: 25%;
