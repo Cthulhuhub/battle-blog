@@ -41,21 +41,21 @@ with app.app_context():
 
     character1 = Character(
         user_id=1,
-        name='fakechar1',
+        name='Crookedwood',
         bio='The first seeded character',
         class_name='Mage',
     )
 
     character2 = Character(
         user_id=2,
-        name='fakechar2',
+        name='Evanobby Barnerty',
         bio='The second seeded character',
         class_name='Barbarian'
     )
 
     character3 = Character(
         user_id=3,
-        name='fakechar3',
+        name='Slimeleman',
         bio='The third seeded character',
         class_name='Warlock',
         followers=[character1, character2]
@@ -63,14 +63,14 @@ with app.app_context():
 
     character4 = Character(
         user_id=1,
-        name='fakechar4',
+        name='Hansenvine Butlerwalker',
         bio='The fourth seeded character',
         class_name='Monk'
     )
 
     post1 = Post(
         character_id=1,
-        title='First seeded post',
+        title='Shield of Fire',
         content=content1  + ' banana banana banana banana banana banana',
         most_used_words=content1   + ' banana banana banana banana banana banana',
         like_count=0,
@@ -79,7 +79,7 @@ with app.app_context():
 
     post2 = Post(
         character_id=2,
-        title='Second seeded post',
+        title='Dragon\'s Grave',
         content=content2  + ' banana banana banana banana banana banana',
         most_used_words=content2   + ' banana banana banana banana banana banana',
         like_count=0,
@@ -88,7 +88,7 @@ with app.app_context():
 
     post3 = Post(
         character_id=3,
-        title='Third seeded post',
+        title='The Blood in the Wind',
         content=content3,
         most_used_words=content3,
         like_count=0,
@@ -97,7 +97,7 @@ with app.app_context():
 
     post4 = Post(
         character_id=4,
-        title='Fourth seeded post',
+        title='Tower of Poseidon',
         content=content4,
         most_used_words=content4,
         like_count=0,
@@ -106,7 +106,7 @@ with app.app_context():
 
     post5 = Post(
         character_id=1,
-        title='Fifth seeded post',
+        title='Titan\'s Oath',
         content=content1,
         most_used_words=content1,
         like_count=0,
@@ -115,7 +115,7 @@ with app.app_context():
 
     post6 = Post(
         character_id=2,
-        title='Sixth seeded post',
+        title='Sword of Hippolyta',
         content=content2,
         most_used_words=content2,
         like_count=0,
@@ -124,7 +124,7 @@ with app.app_context():
 
     post7 = Post(
         character_id=3,
-        title='Seventh seeded post',
+        title='North of Crows',
         content=content3,
         most_used_words=content3,
         like_count=0,
@@ -133,7 +133,7 @@ with app.app_context():
 
     post8 = Post(
         character_id=4,
-        title='Eight seeded post',
+        title='The Prophecy in the Mist',
         content=content4,
         most_used_words=content4,
         like_count=0,
@@ -142,7 +142,7 @@ with app.app_context():
 
     post9 = Post(
         character_id=1,
-        title='Ninth seeded post',
+        title='The Seer of Dark',
         content=content1,
         most_used_words=content1,
         like_count=0,
@@ -151,7 +151,7 @@ with app.app_context():
 
     post10 = Post(
         character_id=2,
-        title='Tenth seeded post',
+        title='Thief of Six',
         content=content2,
         most_used_words=content2,
         like_count=0,
@@ -160,7 +160,7 @@ with app.app_context():
 
     post11 = Post(
         character_id=3,
-        title='Eleventh seeded post',
+        title='The Time of the Cursed',
         content=content3,
         most_used_words=content3,
         like_count=0,
@@ -170,21 +170,21 @@ with app.app_context():
     comment1 = Comment(
         character_id=1,
         post_id=1,
-        content="Seeded comment 1",
+        content="Leading the way mate.",
         created_at=datetime.datetime.now()
     )
 
     comment2 = Comment(
         character_id=2,
         post_id=1,
-        content="Seeded comment 2",
+        content="I want to learn this kind of boldness! Teach me.",
         created_at=datetime.datetime.now()
     )
 
     comment3 = Comment(
         character_id=3,
         post_id=2,
-        content="Seeded comment 3",
+        content="Radiant work you have here.",
         created_at=datetime.datetime.now()
     )
 
